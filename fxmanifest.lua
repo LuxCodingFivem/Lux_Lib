@@ -2,14 +2,14 @@ fx_version 'cerulean'
 games { 'gta5' }
 
 author 'Luxcoding'
-version '1.0.0'
+version '1.0.1'
 
 lua54 'yes'
 
 shared_script {
     'config.lua',
     -- uncomment this if you want to use OX Stuff
-    -- '@ox_lib/init.lua',
+    '@ox_lib/init.lua',
     'shared/common.lua',
     'shared/math.lua',
     'shared/table.lua',
@@ -40,3 +40,4 @@ files {
     'html/css/*',
     'html/webfonts/*'
 }
+

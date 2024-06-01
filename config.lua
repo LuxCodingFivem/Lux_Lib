@@ -2,10 +2,34 @@ Config = {}
 
 Config.Locale = 'de' -- Translation en, de you can add more
 
-Config.InputType = 'LUX' -- LUX, Native or OX(for OX you have to make changes in the fxmanifest.lua)
+-- Here you change the Default Input
 
-Config.NotifyType = 'LUX' -- LUX, Native, Drillen, SY, okok, wasabi, mythic, QBCore, ESX and OX(for OX you have to make changes in the fxmanifest.lua)
-Config.LuxNotifyTypes = { -- Lux Notify Types you can use all Free FontAwsom icons to make custom Notifys
+-- you can Use Following Inputs
+-- LUX (Intigrated)
+-- Native (Intigrated)
+-- OX https://github.com/overextended/ox_lib
+-- if you want to use OX Inputs you have to edit the fxmanifest.lua
+Config.InputType = 'LUX'
+
+-- Here you change the Default Notification
+
+-- you can use following Notifications:
+-- LUX (Intigrated)
+-- Native(Intigrated)
+-- Drillen https://github.com/dillen1/dillen_notifications
+-- SY https://github.com/SYNO-SY/SY_Notify
+-- okok https://okok.tebex.io/package/4724993
+-- wasabi https://store.wasabiscripts.com/package/6215100
+-- mythic https://github.com/JayMontana36/mythic_notify
+-- QBCore https://github.com/qbcore-framework
+-- ESX https://github.com/esx-framework
+-- RTX https://rtx.tebex.io/package/5402098
+-- OX https://github.com/overextended/ox_lib
+-- if you want to use OX Notify you have to edit the fxmanifest.lua
+Config.NotifyType = 'LUX'
+
+-- here you can add more Notifcation Types for LUX Notify
+Config.LuxNotifyTypes = {
     ['info'] = { -- type of the notification
         icon = 'fa-circle-info', -- font awsom icon
         gradient = {
@@ -36,11 +60,25 @@ Config.LuxNotifyTypes = { -- Lux Notify Types you can use all Free FontAwsom ico
     }
 }
 
-Config.ProgressbarType = 'LUX' -- LUX, progressBars, ESX, OX_Progressbar, OX_ProgressCircle, NC, VS and MFP
+-- Here you change the Default Progressbar
+-- LUX (Intigrated)
+-- progressBars https://github.com/EthanPeacock/progressBars
+-- ESX https://github.com/esx-framework
+-- NC https://github.com/NaorNC/nc-progressbar
+-- VS https://vibescripts.tebex.io/category/2132061
+-- MFP https://mfp.tebex.io/package/5888163
+-- OX_Progressbar https://github.com/overextended/ox_lib
+-- OX_ProgressCircle https://github.com/overextended/ox_lib
+-- if you want to use OX Progressbars you have to edit the fxmanifest.lua
+Config.ProgressbarType = 'LUX'
+
+-- User Settings
 
 Config.AllowUserSettings = true -- Allows Users to change there Progressbar, Notify and Input !!! If you want to use this Option you have to inport the UserSettings SQL in your Database
 
-Config.UserSelectableNotify = { -- set the Notifys to true if you want to allow players to select them
+-- Only neded if you set Config.AllowUserSettings to true
+-- here you can setup all Notifcations the user can Select 
+Config.UserSelectableNotify = {
     ['LUX'] = true, 
     ['Native'] = true, 
     ['Drillen'] = true, 
@@ -50,38 +88,50 @@ Config.UserSelectableNotify = { -- set the Notifys to true if you want to allow 
     ['mythic'] = true, 
     ['QBCore'] = false, 
     ['ESX'] = true,
-    ['OX'] = true, -- you have to make changes in the fxmanifest.lua for this option
+    ['RTX'] = false,
+    -- if you want to use the OX Notify you have to make Changes in fxmanifest.lua
+    ['OX'] = true, 
 }
 
-Config.UserSelectableInput = { -- set the Inputs to true if you want to allow players to select them
+-- Only neded if you set Config.AllowUserSettings to true
+-- here you can setup all Inputs the user can Select 
+Config.UserSelectableInput = {
     ['LUX'] = true,
     ['Native'] = true,
-    ['OX'] = true, -- you have to make changes in the fxmanifest.lua for this option
+    -- if you want to use the OX Notify you have to make Changes in fxmanifest.lua
+    ['OX'] = true,
 }
 
-Config.UserSelectableProgressbar = { -- set the Progressbars to true if you want to allow players to select them
+-- Only neded if you set Config.AllowUserSettings to true
+-- here you can setup all Progressbars the user can Select 
+Config.UserSelectableProgressbar = {
     ['LUX'] = true, 
     ['progressBars'] = true, 
     ['ESX'] = true, 
-    ['OX_Progressbar'] = true, -- you have to make changes in the fxmanifest.lua for this option
-    ['OX_ProgressCircle'] = true, -- you have to make changes in the fxmanifest.lua for this option
     ['NC'] = false,
     ['VS'] = false,
     ['MFP'] = false,
+    -- if you want to use the OX Notify you have to make Changes in fxmanifest.lua
+    ['OX_Progressbar'] = true,
+    ['OX_ProgressCircle'] = true,
 }
 
 
--- Framework Spesific if you use ESX you dont have to make changes in this section
+-- Framework Specific if you use ESX if you use esx you don't have to make any changes in this section
 
-Config.PlayerLoadedEventName = 'esx:playerLoaded' -- the event that gets triggert after a player ist loaded on the Server (Only Needed if you use AllowUserSettings)
+-- the event that gets triggert after a player ist loaded on the Server 
+-- (Only Needed if you use AllowUserSettings)
+Config.PlayerLoadedEventName = 'esx:playerLoaded'
 
-Config.GetIdentifierEvent = function(source) -- Place the Event from your Framework to get the Player Identifier
+-- Place here the Event from your Framework to get the Player Identifier
+Config.GetIdentifierEvent = function(source) 
     ESX = exports['es_extended']:getSharedObject()
     local xPlayer = ESX.GetPlayerFromId(source)
     return xPlayer.getIdentifier()
 end
 
-Config.GetAccountMoneyEvent = function(source, account) -- Place the Event from your Framework to get the Player Account Money
+-- Place here the Event from your Framework to get the Player Account Money
+Config.GetAccountMoneyEvent = function(source, account)
     ESX = exports['es_extended']:getSharedObject()
     local xPlayer = ESX.GetPlayerFromId(source)
     return xPlayer.getAccount(account).money
