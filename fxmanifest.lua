@@ -9,7 +9,7 @@ lua54 'yes'
 shared_script {
     'config.lua',
     -- uncomment this if you want to use OX Stuff
-    '@ox_lib/init.lua',
+    -- '@ox_lib/init.lua',
     'shared/common.lua',
     'shared/math.lua',
     'shared/table.lua',
