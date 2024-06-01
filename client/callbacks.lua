@@ -1,6 +1,8 @@
 local RequestId = 0
 local serverRequests = {}
 
+local clientCallbacks = {}
+
 LUX.TriggerServerCallback = function(eventName, callback, ...)
     serverRequests[RequestId] = callback
   

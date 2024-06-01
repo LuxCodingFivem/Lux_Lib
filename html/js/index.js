@@ -12,36 +12,65 @@ window.addEventListener('message', function(event) {
         function ShowInput(bool) {
             if (bool) {
                 input_type = item.input_type;
-                var placeholder = item.placeholder;
+                var data = item.data;
                 if(input_type == "number") {
-                    document.getElementById("inputfield-div").innerHTML = '<input id="inputfield" style="height: 20px; width: 90%; outline: none;" type="number" placeholder="'+placeholder+'">';
+                    $('#inputfield').show();
+                    $('#selectfield').hide();
+                    document.getElementById("inputfield-div").innerHTML = '<input id="inputfield" style="height: 20px; width: 90%; outline: none;" type="number" placeholder="'+data+'">';
                 }
                 else if(input_type == "password") {
-                    document.getElementById("inputfield-div").innerHTML = '<input id="inputfield" style="height: 20px; width: 90%; outline: none;" type="password" placeholder="'+placeholder+'">';
+                    $('#inputfield').show();
+                    $('#selectfield').hide();
+                    document.getElementById("inputfield-div").innerHTML = '<input id="inputfield" style="height: 20px; width: 90%; outline: none;" type="password" placeholder="'+data+'">';
                 }
                 else if(input_type == "text") {
-                    document.getElementById("inputfield-div").innerHTML = '<input id="inputfield" style="height: 20px; width: 90%; outline: none;" type="text" placeholder="'+placeholder+'">';
+                    $('#inputfield').show();
+                    $('#selectfield').hide();
+                    document.getElementById("inputfield-div").innerHTML = '<input id="inputfield" style="height: 20px; width: 90%; outline: none;" type="text" placeholder="'+data+'">';
                 }
                 else if(input_type == "color") {
-                    document.getElementById("inputfield-div").innerHTML = '<input id="inputfield" style="height: 20px; width: 90%; outline: none;" type="color" placeholder="'+placeholder+'">';
+                    $('#inputfield').show();
+                    $('#selectfield').hide();
+                    document.getElementById("inputfield-div").innerHTML = '<input id="inputfield" style="height: 20px; width: 90%; outline: none;" type="color" placeholder="'+data+'">';
                 }
                 else if(input_type == "month") {
-                    document.getElementById("inputfield-div").innerHTML = '<input id="inputfield" style="height: 20px; width: 90%; outline: none;" type="month" placeholder="'+placeholder+'">';
+                    $('#inputfield').show();
+                    $('#selectfield').hide();
+                    document.getElementById("inputfield-div").innerHTML = '<input id="inputfield" style="height: 20px; width: 90%; outline: none;" type="month" placeholder="'+data+'">';
                 }
                 else if(input_type == "date") {
-                    document.getElementById("inputfield-div").innerHTML = '<input id="inputfield" style="height: 20px; width: 90%; outline: none;" type="date" placeholder="'+placeholder+'">';
+                    $('#inputfield').show();
+                    $('#selectfield').hide();
+                    document.getElementById("inputfield-div").innerHTML = '<input id="inputfield" style="height: 20px; width: 90%; outline: none;" type="date" placeholder="'+data+'">';
                 }
                 else if(input_type == "datetime") {
-                    document.getElementById("inputfield-div").innerHTML = '<input id="inputfield" style="height: 20px; width: 90%; outline: none;" type="datetime-local" placeholder="'+placeholder+'">';
+                    $('#inputfield').show();
+                    $('#selectfield').hide();
+                    document.getElementById("inputfield-div").innerHTML = '<input id="inputfield" style="height: 20px; width: 90%; outline: none;" type="datetime-local" placeholder="'+data+'">';
                 }
                 else if(input_type == "range") {
-                    document.getElementById("inputfield-div").innerHTML = '<input id="inputfield" style="height: 20px; width: 90%; outline: none;" type="range" placeholder="'+placeholder+'">';
+                    $('#inputfield').show();
+                    $('#selectfield').hide();
+                    document.getElementById("inputfield-div").innerHTML = '<input id="inputfield" style="height: 20px; width: 90%; outline: none;" type="range" placeholder="'+data+'">';
                 }
                 else if(input_type == "time") {
-                    document.getElementById("inputfield-div").innerHTML = '<input id="inputfield" style="height: 20px; width: 90%; outline: none;" type="url" placeholder="'+placeholder+'">';
+                    $('#inputfield').show();
+                    $('#selectfield').hide();
+                    document.getElementById("inputfield-div").innerHTML = '<input id="inputfield" style="height: 20px; width: 90%; outline: none;" type="url" placeholder="'+data+'">';
                 }
                 else if(input_type == "week") {
-                    document.getElementById("inputfield-div").innerHTML = '<input id="inputfield" style="height: 20px; width: 90%; outline: none;" type="week" placeholder="'+placeholder+'">';
+                    $('#inputfield').show();
+                    $('#selectfield').hide();
+                    document.getElementById("inputfield-div").innerHTML = '<input id="inputfield" style="height: 20px; width: 90%; outline: none;" type="week" placeholder="'+data+'">';
+                }
+                else if (input_type == "select") {
+                    $('#inputfield').hide();
+                    $('#selectfield').show();
+                    var selectfield = document.getElementById("selectfield");
+                    for (let i = 0; i < data.length; i++) {
+                        var element = data[i];
+                        selectfield.innerHTML += `<option value="`+ element.value +`">`+ element.label +`</option>`
+                    }
                 }
                 
     
@@ -50,6 +79,8 @@ window.addEventListener('message', function(event) {
                 document.getElementById("top").innerHTML = '<p style="color: #fff; font-size: 25px; font-family: '+"SignPrinterHouseScript"+', sans-serif; margin: 0; max-width: 100%;">'+ item.text +'</p>';
                 $('#input-body').show();
             } else {
+                $('#inputfield').hide();
+                $('#selectfield').hide();
                 $('#input-body').hide();
             }
         } 
@@ -145,7 +176,10 @@ window.addEventListener("keydown", function (event) {
             $.post('https://Lux_Lib/input_exit', JSON.stringify({}), function(response) {});
             if (input_type == "color") {
                 document.getElementById("inputfield").value = '#000000';
-            } else {
+            } else if (input_type == "select") {
+                document.getElementById("selectfield").innerHTML = ''
+            }
+            else{
                 document.getElementById("inputfield").value = "";
             }
         break;
@@ -163,17 +197,34 @@ async function import_translation() {
 }
 
 function input_send() {
-    var input = document.getElementById("inputfield").value;
+    var input
+    if (input_type == "select") {
+        input = document.getElementById("selectfield").value;
+    } 
+    else {
+        input = document.getElementById("inputfield").value;
+    }
     $.post('https://Lux_Lib/input_send', JSON.stringify({input: input}), function(response) {});
     if (input_type == "color") {
         document.getElementById("inputfield").value = '#000000';
-    } else {
+    } else if (input_type == "select") {
+        document.getElementById("selectfield").innerHTML = ''
+    }
+    else {
         document.getElementById("inputfield").value = "";
     }
 }
 
 function input_close_ui() {
     $.post('https://Lux_Lib/input_exit', JSON.stringify({}), function(response) {});
+    if (input_type == "color") {
+        document.getElementById("inputfield").value = '#000000';
+    } else if (input_type == "select") {
+        document.getElementById("selectfield").innerHTML = ''
+    }
+    else {
+        document.getElementById("inputfield").value = "";
+    }
 }
 
 
