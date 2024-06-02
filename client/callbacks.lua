@@ -33,3 +33,4 @@ RegisterNetEvent('Lux_Lib:triggerClientCallback', function(eventName, requestId,
         TriggerServerEvent('Lux_Lib:clientCallback', requestId, invoker, ...)
     end, ...)
 end)
+

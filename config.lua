@@ -72,6 +72,10 @@ Config.LuxNotifyTypes = {
 -- if you want to use OX Progressbars you have to edit the fxmanifest.lua
 Config.ProgressbarType = 'LUX'
 
+-- Here you can change the Default Infobar
+-- Native (Intigrated)
+Config.InfobarType = 'Native'
+
 -- User Settings
 
 Config.AllowUserSettings = true -- Allows Users to change there Progressbar, Notify and Input !!! If you want to use this Option you have to inport the UserSettings SQL in your Database

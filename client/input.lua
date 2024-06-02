@@ -2,7 +2,7 @@ local display = false
 local msg = nil
 local canceled = false
 
-function input(bool, type, text, data)
+function input(bool, type, text, placeholder)
     display = bool
     SetNuiFocus(bool, bool)
     SendNUIMessage({
@@ -10,7 +10,7 @@ function input(bool, type, text, data)
         input_type = type,
         status = bool,
         text = text,
-        data = data,
+        placeholder = placeholder,
         lang = Config.Locale
     })
 end
@@ -25,9 +25,9 @@ RegisterNUICallback('input_exit', function(data)
     input(false)
 end)
 
-LUX.Input = function(type, text, data)
+LUX.Input = function(type, text, placeholder)
     if Config.InputType == 'LUX' then
-        input(true, type, text, data or '')
+        input(true, type, text, placeholder)
 
         while msg == nil and not canceled do
 		    Wait(1)
@@ -54,10 +54,9 @@ LUX.Input = function(type, text, data)
         end
     elseif Config.InputType == 'OX' then
         local input = lib.inputDialog(text, {
-            { type = type, label = '', placeholder = data },
+            { type = type, label = '', placeholder = placeholder },
         })
 
         return input[1]
     end
 end
-

@@ -2,7 +2,7 @@ fx_version 'cerulean'
 games { 'gta5' }
 
 author 'Luxcoding'
-version '1.0.1'
+version '1.0.2'
 
 lua54 'yes'
 
@@ -21,6 +21,7 @@ client_scripts {
     'client/progressbar.lua',
     'client/notify.lua',
     'client/usersettings.lua',
+    'client/infobar.lua',
 }
 
 server_scripts {
