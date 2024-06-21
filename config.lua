@@ -215,9 +215,6 @@ end
 
 Config.GetnameEvent = function(source)
     ESX = exports['es_extended']:getSharedObject()
-
-Config.GetnameEvent = function(source)
-    ESX = exports['es_extended']:getSharedObject()
     local xPlayer = ESX.GetPlayerFromId(source)
     local name = xPlayer.getName()
     local splitName = string.split(name, " ")
