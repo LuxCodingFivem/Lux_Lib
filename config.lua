@@ -141,6 +141,95 @@ Config.GetAccountMoneyEvent = function(source, account)
     return xPlayer.getAccount(account).money
 end
 
+Config.RemoveAccountMoneyEvent = function(source, account, count)
+    ESX = exports['es_extended']:getSharedObject()
+    local xPlayer = ESX.GetPlayerFromId(source)
+    xPlayer.removeAccountMoney(account, count)
+end
+
+Config.AddAccountMoneyEvent = function(source, account, count)
+    ESX = exports['es_extended']:getSharedObject()
+    local xPlayer = ESX.GetPlayerFromId(source)
+    xPlayer.addAccountMoney(account, count)
+end
+
+Config.GetJobEvent = function(source)
+    ESX = exports['es_extended']:getSharedObject()
+    local xPlayer = ESX.GetPlayerFromId(source)
+    local job = xPlayer.getJob()
+    local jobtable = {
+        id = job.id,
+        name = job.name,
+        label = job.label,
+        grade = job.grade,
+        grade_label = job.grade_label,
+        grade_salary = job.grade_salary,
+        skin_male = job.skin_male,
+        skin_female = job.skin_female
+    }
+    return jobtable
+end
+
+Config.AddItemEvent = function(source, item, count, metadata)
+    if not metadata then 
+        ESX = exports['es_extended']:getSharedObject()
+        local xPlayer = ESX.GetPlayerFromId(source)
+        xPlayer.addInventoryItem(item, count)
+    else
+        exports.ox_inventory:AddItem(source, item, count, metadata)
+    end
+end
+
+Config.RemoveItemEvent = function(source, item, count, metadata)
+    if not metadata then 
+        ESX = exports['es_extended']:getSharedObject()
+        local xPlayer = ESX.GetPlayerFromId(source)
+        xPlayer.addInventoryItem(item, count)
+    else
+        exports.ox_inventory:RemoveItem(source, item, count, metadata)
+    end
+end
+
+Config.GetItemEvent = function(source, item)
+    ESX = exports['es_extended']:getSharedObject()
+    local xPlayer = ESX.GetPlayerFromId(source)
+    local item = xPlayer.getInventoryItem(item)
+    local itemTable = {
+        name = item.name,
+        count = item.count,
+        label = item.label,
+        weight = item.weight,
+        usable = item.usable,
+        rare = item.rare,
+        can_remove = item.can_remove
+    }
+    return itemTable
+end
+
+Config.GetGroupEvent = function(source)
+    ESX = exports['es_extended']:getSharedObject()
+    local xPlayer = ESX.GetPlayerFromId(source)
+    local group = xPlayer.getGroup()
+    return group
+end
+
+Config.GetnameEvent = function(source)
+    ESX = exports['es_extended']:getSharedObject()
+
+Config.GetnameEvent = function(source)
+    ESX = exports['es_extended']:getSharedObject()
+    local xPlayer = ESX.GetPlayerFromId(source)
+    local name = xPlayer.getName()
+    local splitName = string.split(name, " ")
+    local firstname = splitName[1]
+    local lastname = splitName[2]
+    local nameTable = {
+        firstname = firstname,
+        lastname = lastname,
+        fullname = name
+    }
+    return nameTable
+end
 
 -- Translation
 

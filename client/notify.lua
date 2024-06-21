@@ -78,3 +78,20 @@ function FormatText(text)
     end
 end
 
+RegisterNetEvent('Lux_Lib:PictureNotify')
+AddEventHandler('Lux_Lib:PictureNotify', function(title, subject, msg, textureDict, iconType, flash, saveToBrief, hudColorIndex)
+    LUX.PictureNotify(title, subject, msg, textureDict, iconType, flash, saveToBrief, hudColorIndex)
+end)
+
+function LUX.PictureNotify(title, subject, msg, textureDict, iconType, flash, saveToBrief, hudColorIndex)
+    if saveToBrief == nil then
+        saveToBrief = true
+    end
+    AddTextEntry('esxAdvancedNotification', msg)
+    BeginTextCommandThefeedPost('esxAdvancedNotification')
+    if hudColorIndex then
+        ThefeedSetNextPostBackgroundColor(hudColorIndex)
+    end
+    EndTextCommandThefeedPostMessagetext(textureDict, textureDict, false, iconType, title, subject)
+    EndTextCommandThefeedPostTicker(flash or false, saveToBrief)
+end

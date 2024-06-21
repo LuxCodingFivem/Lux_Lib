@@ -2,7 +2,7 @@ fx_version 'cerulean'
 games { 'gta5' }
 
 author 'Luxcoding'
-version '1.0.2'
+version '1.0.3'
 
 lua54 'yes'
 
@@ -13,6 +13,7 @@ shared_script {
     'shared/common.lua',
     'shared/math.lua',
     'shared/table.lua',
+    'shared/playerdata.lua',
 }
 
 client_scripts {
@@ -22,6 +23,7 @@ client_scripts {
     'client/notify.lua',
     'client/usersettings.lua',
     'client/infobar.lua',
+    'client/raycast.lua',
 }
 
 server_scripts {
