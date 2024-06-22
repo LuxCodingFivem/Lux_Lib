@@ -184,7 +184,7 @@ Config.RemoveItemEvent = function(source, item, count, metadata)
     if not metadata then 
         ESX = exports['es_extended']:getSharedObject()
         local xPlayer = ESX.GetPlayerFromId(source)
-        xPlayer.addInventoryItem(item, count)
+        xPlayer.removeInventoryItem(item, count)
     else
         exports.ox_inventory:RemoveItem(source, item, count, metadata)
     end

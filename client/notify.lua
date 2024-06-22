@@ -83,7 +83,7 @@ AddEventHandler('Lux_Lib:PictureNotify', function(title, subject, msg, textureDi
     LUX.PictureNotify(title, subject, msg, textureDict, iconType, flash, saveToBrief, hudColorIndex)
 end)
 
-function LUX.PictureNotify(title, subject, msg, textureDict, iconType, flash, saveToBrief, hudColorIndex)
+LUX.PictureNotify = function(title, subject, msg, textureDict, iconType, flash, saveToBrief, hudColorIndex)
     if saveToBrief == nil then
         saveToBrief = true
     end
